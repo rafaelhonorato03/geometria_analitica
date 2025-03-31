@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Declarando vetor u
 vetor_u = np.array([1, -2, 0])
@@ -29,3 +30,17 @@ print("Produto vetorial de u e v: ", produto_vetorial)
 produto_misto = np.linalg.det([
     vetor_u, vetor_v, vetor_w])
 print("Produto misto de u, v e w: ", produto_misto)
+
+# Fazendo gráficos de vetores em python
+a, b, x0, y0 = 3, 2, -2, 1
+
+#Variações do parâmetro t
+t = np.linspace(-1, 2 * np.pi, 100)
+
+# Equações paramétricas
+x = a * np.cos(t) + x0
+y = b * np.sin(t) + y0
+
+# Fazendo o gráfico
+plt.plot(x, y, label='Elipse')
+plt.title('Gráfico da elipse')
