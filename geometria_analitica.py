@@ -127,3 +127,14 @@ solucao = np.linalg.solve(A, B)
 
 # Exibir a solução
 print(f"Solução: x = {solucao[0]}, y = {solucao[1]}")
+
+# Plotar a solução no gráfico
+plt.scatter(solucao[0], solucao[1], color='red', label='Solução (x, y)')
+plt.axhline(0, color='black', linewidth=0.5, linestyle='--')  # Linha horizontal (eixo x)
+plt.axvline(0, color='black', linewidth=0.5, linestyle='--')  # Linha vertical (eixo y)
+plt.title('Solução do Sistema de Equações Lineares')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+plt.grid(True)
+plt.show()
