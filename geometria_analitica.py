@@ -31,7 +31,7 @@ produto_misto = np.linalg.det([
     vetor_u, vetor_v, vetor_w])
 print("Produto misto de u, v e w: ", produto_misto)
 
-# Fazendo gráficos de vetores em python
+# Fazendo gráficos de vetores em python, grafico 1
 a, b, x0, y0 = 3, 2, -2, 1
 
 #Variações do parâmetro t
@@ -44,3 +44,86 @@ y = b * np.sin(t) + y0
 # Fazendo o gráfico
 plt.plot(x, y, label='Elipse')
 plt.title('Gráfico da elipse')
+
+# Adicionar legenda
+plt.legend()
+
+# Variação dos eixos
+plt.axis([-6, 2, -2, 5])
+
+# Mostrar o gráfico
+plt.show()
+
+# Fazendo gráficos de vetores em python, grafico 2
+a, b, x0, y0 = 3, 2, -2, 1
+
+#Variações do parâmetro t
+t = np.linspace(-1, 1, 100)
+
+# Equações paramétricas
+x = a * np.cos(t) + x0
+y = b * np.sin(t) + y0
+
+# Fazendo o gráfico
+plt.plot(x, y, color = 'red')
+plt.plot(-x, y, color = 'red')
+plt.title('Gráfico da elipse')
+
+# Adicionar legenda
+plt.legend()
+
+# Variação dos eixos
+plt.axis([-5, 5, -2, 4])
+
+# Mostrar o gráfico
+plt.show()
+
+# Fazendo gráficos de vetores em python, grafico de uma parabola
+p, x0, y0 = 2, -2, 1
+
+#Variações do parâmetro t
+t = np.linspace(-4, 4, 100)
+
+# Equações paramétricas
+x = t + x0
+y = ( 1 / (4 * p) ) *t ** 2
+
+# Fazendo o gráfico
+plt.plot(x, y)
+
+# Variação dos eixos
+plt.axis([-7, 3, -1, 3])
+
+# Mostrar o gráfico
+plt.show()
+
+
+# Construindo gráficos polares
+
+# Constante
+n = 20
+
+# Variação do paramettro t
+t = np.linspace(0, 2 * np.pi, 500)
+
+# Paramétricas em coordenadas polares
+theta = t
+r = np.cos(n * t)
+
+# Paramétricas em coordenadas cartesianas
+x = r * np.cos(theta)
+y = r * np.sin(theta)
+
+# Fazendo o gráfico
+plt.plot(x, y)
+plt.show()
+
+# Resolvendo sistemas de equações lineares
+A = np.array([[2, -1], [-1, 2]])
+B = np.array([3, 0])
+
+# Resolver o sistema
+solucao = np.linalg.solve(A, B)
+
+# Exibir a solução
+print(f"Solução: x = {solucao[0]}, y = {solucao[1]}")
