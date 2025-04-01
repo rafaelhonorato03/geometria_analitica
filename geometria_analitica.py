@@ -128,13 +128,54 @@ solucao = np.linalg.solve(A, B)
 # Exibir a solução
 print(f"Solução: x = {solucao[0]}, y = {solucao[1]}")
 
-# Plotar a solução no gráfico
-plt.scatter(solucao[0], solucao[1], color='red', label='Solução (x, y)')
-plt.axhline(0, color='black', linewidth=0.5, linestyle='--')  # Linha horizontal (eixo x)
-plt.axvline(0, color='black', linewidth=0.5, linestyle='--')  # Linha vertical (eixo y)
-plt.title('Solução do Sistema de Equações Lineares')
-plt.xlabel('x')
-plt.ylabel('y')
-plt.legend()
-plt.grid(True)
-plt.show()
+
+# Definição das matrizes
+A = np.array([[2, 1],
+              [1, 3],
+              [0, 1]])
+
+B = np.array([[0, 3, 0],
+              [4, 1, 1]])
+
+# Multiplicação de matrizes
+AB = np.dot(A, B)
+
+print(AB)
+
+# Verificando o tipo de matriz
+def matriz_quadrada(matriz):
+    return matriz.shape[0] == matriz.shape[1]
+
+def matriz_nula(matriz):
+    return np.all(matriz == 0)
+
+def matriz_identidade(matriz):
+    return matriz_quadrada(matriz) and np.all(matriz == np.eye(matriz.shape[0]))
+
+def matriz_simetrica(matriz):
+    return matriz_quadrada(matriz) and np.all(matriz == matriz.T)
+
+# Exemplo de matrizes
+a = np.array([[1, 2, 3], [2, 4, 5], [3, 5, 6]])  # Simétrica
+b = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])  # Identidade
+c = np.zeros((3, 3))  # Nula
+d = np.array([[1, 2], [3, 4]])  # Quadrada, mas não simétrica nem identidade
+
+# Testando as funções
+print("A é quadrada?", matriz_quadrada(a))
+print("B é identidade?", matriz_identidade(b))
+print("C é nula?", matriz_nula(c))
+print("A é simétrica?", matriz_simetrica(a))
+
+# Transposição de matrizes
+A = np.array([[2, 3, 5],
+              [3, 1, -1],
+              [0, 0, 3]])
+
+B = np.array([[0, 2, 2],
+              [1, -1, 5],
+              [5, -1, 0]])
+
+### Exemplo:
+transposta = A.T
+print("Transposta de A:\n", transposta)
