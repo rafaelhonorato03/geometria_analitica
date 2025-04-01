@@ -179,3 +179,11 @@ B = np.array([[0, 2, 2],
 ### Exemplo:
 transposta = A.T
 print("Transposta de A:\n", transposta)
+
+A = np.array([[1,0],
+             [1,3]])
+
+B = np.array([[1,0,2],
+             [1,3,0]])
+
+print(np.dot(A,B))
