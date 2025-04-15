@@ -41,20 +41,10 @@ Certifique-se de ter o Python instalado em sua máquina. Instale as dependência
 
 ```bash
 pip install numpy matplotlib streamlit
+```
 
-Executando o Projeto
-Clone este repositório:
-
+## Executando o Projeto
+1 - Clone este repositório:
 git clone https://github.com/seu-usuario/geometria_analitica.git
 cd geometria_analitica
-
-Para executar os scripts de cálculo e visualização:
-
-python geometria_analitica.py
-
-Para usar a interface interativa do Resolutor de Matrizes:
-
-streamlit run resolutor_matrizes.py
-
-Abra o link gerado no navegador e explore as funcionalidades.
 
