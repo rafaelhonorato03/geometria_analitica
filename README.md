@@ -44,7 +44,5 @@ pip install numpy matplotlib streamlit
 ```
 
 ## Executando o Projeto
-1 - Clone este repositório:
-git clone https://github.com/seu-usuario/geometria_analitica.git
-cd geometria_analitica
+Para usar a interface interativa do Resolutor de Matrizes:
 
