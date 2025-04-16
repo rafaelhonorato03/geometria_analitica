@@ -15,7 +15,8 @@ opcao = st.selectbox(
         "Inversa da Matriz",
         "Verificar se é Invertível",
         "Posto da Matriz",
-        "Resolver Sistema Linear"
+        "Resolver Sistema Linear",
+        "Determinante (Regra de Sarrus)"
     )
 )
 
@@ -71,6 +72,29 @@ def resolver_sistema(matriz):
     except Exception as e:
         return f"Erro ao resolver sistema: {str(e)}"
 
+def regra_de_sarrus(matriz):
+    """
+    Calcula o determinante de uma matriz 3x3 usando a Regra de Sarrus.
+    :param matriz: Matriz 3x3 (numpy array).
+    :return: Determinante da matriz ou mensagem de erro.
+    """
+    try:
+        if matriz.shape != (3, 3):
+            return "A Regra de Sarrus só pode ser aplicada a matrizes 3x3."
+        
+        # Regra de Sarrus
+        det = (
+            matriz[0, 0] * matriz[1, 1] * matriz[2, 2] +
+            matriz[0, 1] * matriz[1, 2] * matriz[2, 0] +
+            matriz[0, 2] * matriz[1, 0] * matriz[2, 1] -
+            matriz[0, 2] * matriz[1, 1] * matriz[2, 0] -
+            matriz[0, 0] * matriz[1, 2] * matriz[2, 1] -
+            matriz[0, 1] * matriz[1, 0] * matriz[2, 2]
+        )
+        return f"O determinante da matriz é {np.round(det, 2)}"
+    except Exception as e:
+        return f"Erro ao calcular determinante: {str(e)}"
+
 if st.button("Executar"):
     matriz = parse_matrix(entrada)
 
@@ -89,6 +113,8 @@ if st.button("Executar"):
             resultado = calcular_posto(matriz)
         elif opcao == "Resolver Sistema Linear":
             resultado = resolver_sistema(matriz)
+        elif opcao == "Determinante (Regra de Sarrus)":
+            resultado = regra_de_sarrus(matriz)
 
         if isinstance(resultado, np.ndarray):
             st.write("Matriz Resultante:")
