@@ -16,7 +16,8 @@ opcao = st.selectbox(
         "Verificar se é Invertível",
         "Posto da Matriz",
         "Resolver Sistema Linear",
-        "Determinante (Regra de Sarrus)"
+        "Determinante (Regra de Sarrus)",
+        "Transposta da Matriz"
     )
 )
 
@@ -95,6 +96,17 @@ def regra_de_sarrus(matriz):
     except Exception as e:
         return f"Erro ao calcular determinante: {str(e)}"
 
+def transposta(matriz):
+    """
+    Calcula a matriz transposta.
+    :param matriz: Matriz (numpy array).
+    :return: Matriz transposta.
+    """
+    try:
+        return matriz.T
+    except Exception as e:
+        return f"Erro ao calcular a transposta: {str(e)}"
+
 if st.button("Executar"):
     matriz = parse_matrix(entrada)
 
@@ -115,6 +127,8 @@ if st.button("Executar"):
             resultado = resolver_sistema(matriz)
         elif opcao == "Determinante (Regra de Sarrus)":
             resultado = regra_de_sarrus(matriz)
+        elif opcao == "Transposta da Matriz":
+            resultado = transposta(matriz)
 
         if isinstance(resultado, np.ndarray):
             st.write("Matriz Resultante:")
