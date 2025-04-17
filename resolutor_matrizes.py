@@ -17,6 +17,7 @@ opcao = st.selectbox(
         "Posto da Matriz",
         "Resolver Sistema Linear",
         "Determinante (Regra de Sarrus)",
+        "Determinante da Matriz",
         "Transposta da Matriz"
     )
 )
@@ -107,6 +108,23 @@ def transposta(matriz):
     except Exception as e:
         return f"Erro ao calcular a transposta: {str(e)}"
 
+def determinante(matriz):
+    """
+    Calcula o determinante de uma matriz.
+    :param matriz: Matriz quadrada (numpy array).
+    :return: Determinante da matriz ou mensagem de erro.
+    """
+    try:
+        # Verificar se a matriz é quadrada
+        if matriz.shape[0] != matriz.shape[1]:
+            return "O determinante só pode ser calculado para matrizes quadradas."
+        
+        # Calcular o determinante
+        det = np.linalg.det(matriz)
+        return f"O determinante da matriz é {np.round(det, 2)}"
+    except Exception as e:
+        return f"Erro ao calcular o determinante: {str(e)}"
+
 if st.button("Executar"):
     matriz = parse_matrix(entrada)
 
@@ -127,6 +145,8 @@ if st.button("Executar"):
             resultado = resolver_sistema(matriz)
         elif opcao == "Determinante (Regra de Sarrus)":
             resultado = regra_de_sarrus(matriz)
+        elif opcao == "Determinante da Matriz":
+            resultado = determinante(matriz)
         elif opcao == "Transposta da Matriz":
             resultado = transposta(matriz)
 
