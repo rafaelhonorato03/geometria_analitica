@@ -9,8 +9,6 @@ st.title("🧮 Resolutor de Matrizes")
          #caption="René Descartes, o pai da álgebra linear.",
          #width=150)
 
-st.set_page_config(layout="wide")
-
 # Centralizar título
 st.markdown("<h1 style='text-align: center;'>Bem-vindo ao mundo de René Descartes</h1>", unsafe_allow_html=True)
 
