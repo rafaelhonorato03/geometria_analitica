@@ -14,7 +14,7 @@ st.markdown(
     """
     <div style="text-align: center;">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg/800px-Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg" width="150">
-        <p style="font-size:20px;">“Penso, logo existo.”</p>
+        <p style="font-size:12px;">“René Descartes, o pai da álgebra linear.”</p>
     </div>
     """,
     unsafe_allow_html=True
