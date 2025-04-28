@@ -16,7 +16,7 @@ st.markdown("<h1 style='text-align: center;'>Bem-vindo ao mundo de René Descart
 st.markdown(
     """
     <div style="text-align: center;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg" width="300">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg/800px-Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg" width="300">
         <p style="font-size:20px;">“Penso, logo existo.”</p>
     </div>
     """,
