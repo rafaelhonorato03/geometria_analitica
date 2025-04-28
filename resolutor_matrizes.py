@@ -6,7 +6,8 @@ st.set_page_config(page_title="Resolutor de Matrizes", layout="centered")
 st.title("🧮 Resolutor de Matrizes")
 
 st.image('https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg/800px-Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg',
-         caption="René Descartes, o pai da álgebra linear.", use_column_width=True)
+         caption="René Descartes, o pai da álgebra linear.",
+         width=300)
 
 st.markdown("Digite a matriz separando colunas por espaço e linhas por ENTER:")
 entrada = st.text_area("Exemplo:", "1 2 3\n0 1 4\n5 6 0")
