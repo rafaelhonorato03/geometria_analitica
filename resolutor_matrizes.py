@@ -5,9 +5,25 @@ st.set_page_config(page_title="Resolutor de Matrizes", layout="centered")
 
 st.title("🧮 Resolutor de Matrizes")
 
-st.image('https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg/800px-Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg',
-         caption="René Descartes, o pai da álgebra linear.",
-         width=300)
+#st.image('https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg/800px-Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg',
+         #caption="René Descartes, o pai da álgebra linear.",
+         #width=150)
+
+st.set_page_config(layout="wide")
+
+# Centralizar título
+st.markdown("<h1 style='text-align: center;'>Bem-vindo ao mundo de René Descartes</h1>", unsafe_allow_html=True)
+
+# Centralizar imagem pequena
+st.markdown(
+    """
+    <div style="text-align: center;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg" width="300">
+        <p style="font-size:20px;">“Penso, logo existo.”</p>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 st.markdown("Digite a matriz separando colunas por espaço e linhas por ENTER:")
 entrada = st.text_area("Exemplo:", "1 2 3\n0 1 4\n5 6 0")
