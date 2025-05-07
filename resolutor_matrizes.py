@@ -160,6 +160,19 @@ def angulo_entre_vetores(vetor1, vetor2):
     except Exception as e:
         return f"Erro ao calcular o ângulo: {str(e)}"
 
+def reta_entre_vetores(vetor1, vetor2):
+    """
+    Retorna a equação paramétrica da reta definida por dois vetores.
+    :param vetor1: Primeiro vetor (numpy array).
+    :param vetor2: Segundo vetor (numpy array).
+    :return: Equação paramétrica da reta.
+    """
+    try:
+        vetor_direcao = vetor2 - vetor1
+        return f"r(t) = {vetor1} + t * {vetor_direcao}"
+    except Exception as e:
+        return f"Erro ao calcular a reta: {str(e)}"
+
 if st.button("Executar"):
     matriz = parse_matrix(entrada)
 
@@ -207,7 +220,14 @@ except ValueError:
 # Escolher a operação
 operacao = st.selectbox(
     "Escolha a operação:",
-    ("Soma de Vetores", "Multiplicação por Escalar", "Produto Escalar", "Produto Vetorial", "Ângulo entre Vetores")
+    (
+        "Soma de Vetores",
+        "Multiplicação por Escalar",
+        "Produto Escalar",
+        "Produto Vetorial",
+        "Ângulo entre Vetores",
+        "Reta entre Vetores"
+    )
 )
 
 # Executar a operação
@@ -231,3 +251,6 @@ if st.button("Calcular"):
     elif operacao == "Ângulo entre Vetores":
         resultado = angulo_entre_vetores(vetor1, vetor2)
         st.write(f"Ângulo entre os vetores (em graus): {resultado:.2f}")
+    elif operacao == "Reta entre Vetores":
+        resultado = reta_entre_vetores(vetor1, vetor2)
+        st.write("Equação da reta:", resultado)
