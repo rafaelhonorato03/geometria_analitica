@@ -2,10 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Declarando vetor u
-vetor_u = np.array([1, -2, 0])
+vetor_u = np.array([1, 3, 2])
 
 # Declarando vetor v
-vetor_v = np.array([0, 2, 2])
+vetor_v = np.array([-1, -3, -2])
 
 # Declarando o vetor w
 vetor_w = np.array([1, 2, -1])
