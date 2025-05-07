@@ -1,13 +1,9 @@
 import streamlit as st
 import numpy as np
 
-st.set_page_config(page_title="Resolutor de Matrizes", layout="centered")
+st.set_page_config(page_title="Resolutor de Matrizes e Operações com Vetores", layout="centered")
 
 st.title("🧮 Resolutor de Matrizes")
-
-#st.image('https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg/800px-Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg',
-         #caption="René Descartes, o pai da álgebra linear.",
-         #width=150)
 
 # Centralizar imagem pequena
 st.markdown(
@@ -140,6 +136,30 @@ def determinante(matriz):
     except Exception as e:
         return f"Erro ao calcular o determinante: {str(e)}"
 
+def soma_vetores(vetor1, vetor2):
+    return vetor1 + vetor2
+
+def multiplicacao_escalar(vetor, escalar):
+    return escalar * vetor
+
+def produto_escalar(vetor1, vetor2):
+    return np.dot(vetor1, vetor2)
+
+def produto_vetorial(vetor1, vetor2):
+    return np.cross(vetor1, vetor2)
+
+def angulo_entre_vetores(vetor1, vetor2):
+    try:
+        produto_escalar = np.dot(vetor1, vetor2)
+        norma_vetor1 = np.linalg.norm(vetor1)
+        norma_vetor2 = np.linalg.norm(vetor2)
+        cos_theta = produto_escalar / (norma_vetor1 * norma_vetor2)
+        cos_theta = np.clip(cos_theta, -1.0, 1.0)
+        angulo = np.degrees(np.arccos(cos_theta))
+        return angulo
+    except Exception as e:
+        return f"Erro ao calcular o ângulo: {str(e)}"
+
 if st.button("Executar"):
     matriz = parse_matrix(entrada)
 
@@ -170,3 +190,44 @@ if st.button("Executar"):
             st.dataframe(resultado)
         else:
             st.write(resultado)
+
+st.title("🧮 Operações com Vetores")
+
+# Entrada dos vetores
+vetor1 = st.text_input("Digite o primeiro vetor (separado por vírgulas):", "1, 2, 3")
+vetor2 = st.text_input("Digite o segundo vetor (separado por vírgulas):", "4, 5, 6")
+
+# Converter os vetores para arrays NumPy
+try:
+    vetor1 = np.array([float(x) for x in vetor1.split(",")])
+    vetor2 = np.array([float(x) for x in vetor2.split(",")])
+except ValueError:
+    st.error("Por favor, insira os vetores corretamente (números separados por vírgulas).")
+
+# Escolher a operação
+operacao = st.selectbox(
+    "Escolha a operação:",
+    ("Soma de Vetores", "Multiplicação por Escalar", "Produto Escalar", "Produto Vetorial", "Ângulo entre Vetores")
+)
+
+# Executar a operação
+if st.button("Calcular"):
+    if operacao == "Soma de Vetores":
+        resultado = soma_vetores(vetor1, vetor2)
+        st.write("Resultado da soma:", resultado)
+    elif operacao == "Multiplicação por Escalar":
+        escalar = st.number_input("Digite o escalar:", value=1.0)
+        resultado = multiplicacao_escalar(vetor1, escalar)
+        st.write(f"Resultado da multiplicação de {vetor1} por {escalar}:", resultado)
+    elif operacao == "Produto Escalar":
+        resultado = produto_escalar(vetor1, vetor2)
+        st.write("Resultado do produto escalar:", resultado)
+    elif operacao == "Produto Vetorial":
+        if len(vetor1) == 3 and len(vetor2) == 3:
+            resultado = produto_vetorial(vetor1, vetor2)
+            st.write("Resultado do produto vetorial:", resultado)
+        else:
+            st.error("O produto vetorial só é definido para vetores 3D.")
+    elif operacao == "Ângulo entre Vetores":
+        resultado = angulo_entre_vetores(vetor1, vetor2)
+        st.write(f"Ângulo entre os vetores (em graus): {resultado:.2f}")
