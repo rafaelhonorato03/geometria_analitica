@@ -2,13 +2,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Declarando vetor u
-vetor_u = np.array([1, 3, 2])
+vetor_u = np.array([1, 1])
 
 # Declarando vetor v
-vetor_v = np.array([-1, -3, -2])
+vetor_v = np.array([-1, 1])
 
 # Declarando o vetor w
-vetor_w = np.array([1, 2, -1])
+vetor_w = np.array([0, 0, 1])
 
 # Soma de vetores
 soma_vetores = vetor_u + vetor_v
@@ -21,6 +21,38 @@ print("Multiplicação do vetor u por 7: ", multiplicacao_escalar)
 # Produto escalar de u com v
 produto_escalar = np.dot(vetor_u, vetor_v)
 print("Produto escalar de u e v: ", produto_escalar)
+
+# Função para calcular o ângulo entre vetores
+def angulo_entre_vetores(vetor1, vetor2):
+    """
+    Calcula o ângulo (em graus) entre dois vetores.
+    :param vetor1: Primeiro vetor (numpy array).
+    :param vetor2: Segundo vetor (numpy array).
+    :return: Ângulo em graus entre os vetores.
+    """
+    try:
+        # Produto escalar
+        produto_escalar = np.dot(vetor1, vetor2)
+        
+        # Normas dos vetores
+        norma_vetor1 = np.linalg.norm(vetor1)
+        norma_vetor2 = np.linalg.norm(vetor2)
+        
+        # Cálculo do cosseno do ângulo
+        cos_theta = produto_escalar / (norma_vetor1 * norma_vetor2)
+        
+        # Garantir que o valor esteja no intervalo válido para arccos
+        cos_theta = np.clip(cos_theta, -1.0, 1.0)
+        
+        # Cálculo do ângulo em radianos e conversão para graus
+        angulo = np.degrees(np.arccos(cos_theta))
+        return angulo
+    except Exception as e:
+        return f"Erro ao calcular o ângulo: {str(e)}"
+
+# Calcular o ângulo entre os vetores
+angulo = angulo_entre_vetores(vetor_u, vetor_v)
+print(f"Ângulo entre u e v: {angulo:.2f} graus")
 
 # Produto vetorial de u com v
 produto_vetorial = np.cross(vetor_u, vetor_v)
