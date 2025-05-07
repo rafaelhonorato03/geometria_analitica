@@ -226,7 +226,6 @@ operacao = st.selectbox(
         "Produto Escalar",
         "Produto Vetorial",
         "Ângulo entre Vetores",
-        "Reta entre Vetores"
     )
 )
 
@@ -251,6 +250,3 @@ if st.button("Calcular"):
     elif operacao == "Ângulo entre Vetores":
         resultado = angulo_entre_vetores(vetor1, vetor2)
         st.write(f"Ângulo entre os vetores (em graus): {resultado:.2f}")
-    elif operacao == "Reta entre Vetores":
-        resultado = reta_entre_vetores(vetor1, vetor2)
-        st.write("Equação da reta:", resultado)
