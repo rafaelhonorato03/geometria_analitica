@@ -22,14 +22,14 @@ entrada = st.text_area("Exemplo:", "1 2 3\n0 1 4\n5 6 0")
 opcao = st.selectbox(
     "Escolha a operação:",
     (
-        "Forma Escada (Gauss-Jordan)",
-        "Inversa da Matriz",
-        "Verificar se é Invertível",
-        "Posto da Matriz",
-        "Resolver Sistema Linear",
         "Determinante (Regra de Sarrus)",
         "Determinante da Matriz",
-        "Transposta da Matriz"
+        "Forma Escada (Gauss-Jordan)",
+        "Inversa da Matriz",
+        "Posto da Matriz",
+        "Resolver Sistema Linear",
+        "Transposta da Matriz",
+        "Verificar se é Invertível"
     )
 )
 
@@ -246,12 +246,12 @@ except ValueError:
 operacao = st.selectbox(
     "Escolha a operação:",
     (
-        "Soma de Vetores",
+        "Ângulo entre Vetores",
         "Multiplicação por Escalar",
         "Produto Escalar",
+        "Produto Misto",
         "Produto Vetorial",
-        "Ângulo entre Vetores",
-        "Produto Misto"
+        "Soma de Vetores"
     )
 )
 
