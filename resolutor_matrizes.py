@@ -173,6 +173,25 @@ def reta_entre_vetores(vetor1, vetor2):
     except Exception as e:
         return f"Erro ao calcular a reta: {str(e)}"
 
+def produto_misto(vetor1, vetor2, vetor3):
+    """
+    Calcula o produto misto de três vetores no espaço 3D.
+    :param vetor1: Primeiro vetor (numpy array).
+    :param vetor2: Segundo vetor (numpy array).
+    :param vetor3: Terceiro vetor (numpy array).
+    :return: Produto misto (escalar).
+    """
+    try:
+        # Produto vetorial entre vetor2 e vetor3
+        produto_vetorial = np.cross(vetor2, vetor3)
+        
+        # Produto escalar entre vetor1 e o resultado do produto vetorial
+        produto_misto = np.dot(vetor1, produto_vetorial)
+        
+        return produto_misto
+    except Exception as e:
+        return f"Erro ao calcular o produto misto: {str(e)}"
+
 if st.button("Executar"):
     matriz = parse_matrix(entrada)
 
@@ -209,6 +228,7 @@ st.title("🧮 Operações com Vetores")
 # Entrada dos vetores
 vetor1 = st.text_input("Digite o primeiro vetor (separado por vírgulas):", "1, 2, 3")
 vetor2 = st.text_input("Digite o segundo vetor (separado por vírgulas):", "4, 5, 6")
+vetor3 = st.text_input("Digite o terceiro vetor (separado por vírgulas):", "7, 8, 9")
 
 # Converter os vetores para arrays NumPy
 try:
@@ -216,6 +236,11 @@ try:
     vetor2 = np.array([float(x) for x in vetor2.split(",")])
 except ValueError:
     st.error("Por favor, insira os vetores corretamente (números separados por vírgulas).")
+
+try:
+    vetor3 = np.array([float(x) for x in vetor3.split(",")])
+except ValueError:
+    st.error("Por favor, insira o terceiro vetor corretamente (números separados por vírgulas).")
 
 # Escolher a operação
 operacao = st.selectbox(
@@ -226,6 +251,7 @@ operacao = st.selectbox(
         "Produto Escalar",
         "Produto Vetorial",
         "Ângulo entre Vetores",
+        "Produto Misto"
     )
 )
 
@@ -250,3 +276,10 @@ if st.button("Calcular"):
     elif operacao == "Ângulo entre Vetores":
         resultado = angulo_entre_vetores(vetor1, vetor2)
         st.write(f"Ângulo entre os vetores (em graus): {resultado:.2f}")
+    elif operacao == "Produto Misto":
+        if len(vetor1) == 3 and len(vetor2) == 3 and len(vetor3) == 3:
+            resultado = produto_misto(vetor1, vetor2, vetor3)
+            st.write("Resultado do produto misto:", resultado)
+            st.write(f"Volume do paralelepípedo: {abs(resultado):.2f}")
+        else:
+            st.error("O produto misto só é definido para vetores 3D.")
