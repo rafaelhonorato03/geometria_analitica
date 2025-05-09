@@ -225,10 +225,12 @@ if st.button("Executar"):
 
 st.title("🧮 Operações com Vetores")
 
+# Escolher a quantidade de vetores
+quantidade_vetores = st.radio("Quantos vetores você deseja usar?", ("Dois Vetores", "Três Vetores"))
+
 # Entrada dos vetores
 vetor1 = st.text_input("Digite o primeiro vetor (separado por vírgulas):", "1, 2, 3")
 vetor2 = st.text_input("Digite o segundo vetor (separado por vírgulas):", "4, 5, 6")
-vetor3 = st.text_input("Digite o terceiro vetor (separado por vírgulas):", "7, 8, 9")
 
 # Converter os vetores para arrays NumPy
 try:
@@ -237,23 +239,33 @@ try:
 except ValueError:
     st.error("Por favor, insira os vetores corretamente (números separados por vírgulas).")
 
-try:
-    vetor3 = np.array([float(x) for x in vetor3.split(",")])
-except ValueError:
-    st.error("Por favor, insira o terceiro vetor corretamente (números separados por vírgulas).")
+# Entrada do terceiro vetor, se necessário
+if quantidade_vetores == "Três Vetores":
+    vetor3 = st.text_input("Digite o terceiro vetor (separado por vírgulas):", "7, 8, 9")
+    try:
+        vetor3 = np.array([float(x) for x in vetor3.split(",")])
+    except ValueError:
+        st.error("Por favor, insira o terceiro vetor corretamente (números separados por vírgulas).")
 
 # Escolher a operação
-operacao = st.selectbox(
-    "Escolha a operação:",
-    (
-        "Ângulo entre Vetores",
-        "Multiplicação por Escalar",
-        "Produto Escalar",
-        "Produto Misto",
-        "Produto Vetorial",
-        "Soma de Vetores"
+if quantidade_vetores == "Dois Vetores":
+    operacao = st.selectbox(
+        "Escolha a operação:",
+        (
+            "Ângulo entre Vetores",
+            "Multiplicação por Escalar",
+            "Produto Escalar",
+            "Produto Vetorial",
+            "Soma de Vetores"
+        )
     )
-)
+else:  # Três Vetores
+    operacao = st.selectbox(
+        "Escolha a operação:",
+        (
+            "Produto Misto",
+        )
+    )
 
 # Executar a operação
 if st.button("Calcular"):
