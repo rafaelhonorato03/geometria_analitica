@@ -22,14 +22,30 @@ entrada = st.text_area("Exemplo:", "1 2 3\n0 1 4\n5 6 0")
 opcao = st.selectbox(
     "Escolha a operação:",
     (
+        # Operações básicas com matrizes
         "Determinante (Regra de Sarrus)",
         "Determinante da Matriz",
+        "Transposta da Matriz",
         "Forma Escada (Gauss-Jordan)",
         "Inversa da Matriz",
+        "Verificar se é Invertível",
         "Posto da Matriz",
         "Resolver Sistema Linear",
-        "Transposta da Matriz",
-        "Verificar se é Invertível"
+
+        # Operações com pontos e vetores
+        "Distância entre Pontos",
+        "Ângulo entre Vetores",
+
+        # Operações com retas
+        "Equações da Reta (Paramétricas e Forma Simétrica)",
+        "Ângulo entre Retas",
+        "Distância entre Duas Retas",
+
+        # Operações com planos
+        "Equação Paramétrica do Plano",
+        "Equação Cartesiana do Plano",
+        "Ângulo entre Planos",
+        "Interseção entre Três Planos"
     )
 )
 
@@ -192,6 +208,100 @@ def produto_misto(vetor1, vetor2, vetor3):
     except Exception as e:
         return f"Erro ao calcular o produto misto: {str(e)}"
 
+def distancia_entre_duas_retas(p1, d1, p2, d2):
+    """
+    Calcula a distância entre duas retas no espaço 3D.
+    :param p1: Ponto em uma das retas (numpy array).
+    :param d1: Vetor diretor da primeira reta (numpy array).
+    :param p2: Ponto na outra reta (numpy array).
+    :param d2: Vetor diretor da segunda reta (numpy array).
+    :return: Distância entre as retas.
+    """
+    try:
+        vetor_conexao = p2 - p1
+        vetor_normal = np.cross(d1, d2)
+        norma_normal = np.linalg.norm(vetor_normal)
+        if norma_normal == 0:
+            return "As retas são paralelas ou coincidentes."
+        distancia = abs(np.dot(vetor_conexao, vetor_normal)) / norma_normal
+        return f"A distância entre as retas é {distancia:.2f}"
+    except Exception as e:
+        return f"Erro ao calcular a distância entre as retas: {str(e)}"
+
+def distancia_entre_pontos(p1, p2):
+    """
+    Calcula a distância entre dois pontos no espaço.
+    :param p1: Primeiro ponto (numpy array).
+    :param p2: Segundo ponto (numpy array).
+    :return: Distância entre os pontos.
+    """
+    try:
+        distancia = np.linalg.norm(p2 - p1)
+        return f"A distância entre os pontos é {distancia:.2f}"
+    except Exception as e:
+        return f"Erro ao calcular a distância entre os pontos: {str(e)}"
+
+def intersecao_tres_planos(A, B, C, D):
+    """
+    Verifica a interseção de três planos no espaço.
+    :param A, B, C: Coeficientes das equações dos planos (numpy arrays).
+    :param D: Termos independentes dos planos (numpy array).
+    :return: Ponto de interseção ou mensagem de erro.
+    """
+    try:
+        coeficientes = np.array([A, B, C])
+        termos_independentes = np.array(D)
+        if np.linalg.matrix_rank(coeficientes) < 3:
+            return "Os planos não se intersectam em um único ponto."
+        ponto_intersecao = np.linalg.solve(coeficientes, termos_independentes)
+        return f"O ponto de interseção é {np.round(ponto_intersecao, 2)}"
+    except Exception as e:
+        return f"Erro ao calcular a interseção: {str(e)}"
+
+def angulo_entre_retas(d1, d2):
+    """
+    Calcula o ângulo entre duas retas no espaço 3D.
+    :param d1: Vetor diretor da primeira reta (numpy array).
+    :param d2: Vetor diretor da segunda reta (numpy array).
+    :return: Ângulo entre as retas em graus.
+    """
+    try:
+        produto_escalar = np.dot(d1, d2)
+        norma_d1 = np.linalg.norm(d1)
+        norma_d2 = np.linalg.norm(d2)
+        cos_theta = produto_escalar / (norma_d1 * norma_d2)
+        cos_theta = np.clip(cos_theta, -1.0, 1.0)
+        angulo = np.degrees(np.arccos(cos_theta))
+        return f"O ângulo entre as retas é {angulo:.2f} graus"
+    except Exception as e:
+        return f"Erro ao calcular o ângulo entre as retas: {str(e)}"
+
+def equacao_parametrica_plano(ponto, vetor1, vetor2):
+    """
+    Retorna a equação paramétrica de um plano.
+    :param ponto: Ponto no plano (numpy array).
+    :param vetor1: Primeiro vetor diretor do plano (numpy array).
+    :param vetor2: Segundo vetor diretor do plano (numpy array).
+    :return: Equação paramétrica do plano.
+    """
+    try:
+        return f"r(u, v) = {ponto} + u * {vetor1} + v * {vetor2}"
+    except Exception as e:
+        return f"Erro ao calcular a equação paramétrica do plano: {str(e)}"
+
+def equacao_cartesiana_plano(ponto, normal):
+    """
+    Retorna a equação cartesiana de um plano.
+    :param ponto: Ponto no plano (numpy array).
+    :param normal: Vetor normal ao plano (numpy array).
+    :return: Equação cartesiana do plano.
+    """
+    try:
+        d = -np.dot(normal, ponto)
+        return f"{normal[0]}x + {normal[1]}y + {normal[2]}z + ({d}) = 0"
+    except Exception as e:
+        return f"Erro ao calcular a equação cartesiana do plano: {str(e)}"
+
 if st.button("Executar"):
     matriz = parse_matrix(entrada)
 
@@ -216,6 +326,41 @@ if st.button("Executar"):
             resultado = determinante(matriz)
         elif opcao == "Transposta da Matriz":
             resultado = transposta(matriz)
+        elif opcao == "Distância entre Duas Retas":
+            # Solicitar entrada de pontos e vetores
+            p1 = np.array([float(x) for x in st.text_input("Digite o ponto P1 (separado por vírgulas):").split(",")])
+            d1 = np.array([float(x) for x in st.text_input("Digite o vetor diretor D1 (separado por vírgulas):").split(",")])
+            p2 = np.array([float(x) for x in st.text_input("Digite o ponto P2 (separado por vírgulas):").split(",")])
+            d2 = np.array([float(x) for x in st.text_input("Digite o vetor diretor D2 (separado por vírgulas):").split(",")])
+            resultado = distancia_entre_duas_retas(p1, d1, p2, d2)
+        elif opcao == "Interseção entre Três Planos":
+            # Solicitar entrada de coeficientes
+            A = np.array([float(x) for x in st.text_input("Digite os coeficientes do plano 1 (separado por vírgulas):").split(",")])
+            B = np.array([float(x) for x in st.text_input("Digite os coeficientes do plano 2 (separado por vírgulas):").split(",")])
+            C = np.array([float(x) for x in st.text_input("Digite os coeficientes do plano 3 (separado por vírgulas):").split(",")])
+            D = np.array([float(x) for x in st.text_input("Digite os termos independentes (separado por vírgulas):").split(",")])
+            resultado = intersecao_tres_planos(A, B, C, D)
+        elif opcao == "Ângulo entre Retas":
+            # Solicitar entrada de vetores diretores
+            d1 = np.array([float(x) for x in st.text_input("Digite o vetor diretor D1 (separado por vírgulas):").split(",")])
+            d2 = np.array([float(x) for x in st.text_input("Digite o vetor diretor D2 (separado por vírgulas):").split(",")])
+            resultado = angulo_entre_retas(d1, d2)
+        elif opcao == "Equação Paramétrica do Plano":
+            # Solicitar entrada de ponto e vetores diretores
+            ponto = np.array([float(x) for x in st.text_input("Digite o ponto no plano (separado por vírgulas):").split(",")])
+            vetor1 = np.array([float(x) for x in st.text_input("Digite o primeiro vetor diretor (separado por vírgulas):").split(",")])
+            vetor2 = np.array([float(x) for x in st.text_input("Digite o segundo vetor diretor (separado por vírgulas):").split(",")])
+            resultado = equacao_parametrica_plano(ponto, vetor1, vetor2)
+        elif opcao == "Equação Cartesiana do Plano":
+            # Solicitar entrada de ponto e vetor normal
+            ponto = np.array([float(x) for x in st.text_input("Digite o ponto no plano (separado por vírgulas):").split(",")])
+            normal = np.array([float(x) for x in st.text_input("Digite o vetor normal ao plano (separado por vírgulas):").split(",")])
+            resultado = equacao_cartesiana_plano(ponto, normal)
+        elif opcao == "Distância entre Pontos":
+            # Solicitar entrada de dois pontos
+            p1 = np.array([float(x) for x in st.text_input("Digite o ponto P1 (separado por vírgulas):").split(",")])
+            p2 = np.array([float(x) for x in st.text_input("Digite o ponto P2 (separado por vírgulas):").split(",")])
+            resultado = distancia_entre_pontos(p1, p2)
 
         if isinstance(resultado, np.ndarray):
             st.write("Matriz Resultante:")
