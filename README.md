@@ -7,32 +7,78 @@ Este repositório reúne scripts e ferramentas interativas para explorar conceit
 
 ---
 
-## ⚙️ Funcionalidades
+## 🏗️ Nova Estrutura Organizada
 
-### 🔢 Operações com Matrizes
-- **Forma Escada (Gauss-Jordan)**: Escalonamento para resolver sistemas.
-- **Matriz Inversa**: Cálculo da inversa, se existir.
-- **Verificação de Invertibilidade**
-- **Cálculo do Posto da Matriz**
-- **Resolução de Sistemas Lineares** com matriz aumentada.
+O projeto foi reorganizado para melhor compreensão e manutenção:
 
-### 📊 Visualizações Gráficas
-- **Elipses e Parábolas** em coordenadas cartesianas.
-- **Curvas Polares**
-- **Personalização** com títulos, legendas e eixos.
-
-### 🧮 Operações com Vetores
-- Soma, multiplicação por escalar, produto escalar e vetorial.
-- **Produto Misto**: Cálculo de volumes em 3D.
+```
+geometria_analitica/
+├── main.py                    # 🚀 Arquivo principal (menu interativo)
+├── requirements.txt           # 📦 Dependências do projeto
+├── README.md                  # 📖 Documentação
+│
+├── src/                       # 📁 Código fonte organizado
+│   ├── __init__.py           # Pacote principal
+│   │
+│   ├── core/                 # 🔧 Operações fundamentais
+│   │   ├── __init__.py
+│   │   ├── matriz_operations.py    # Operações com matrizes
+│   │   ├── vector_operations.py    # Operações com vetores
+│   │   └── geometric_operations.py # Geometria analítica
+│   │
+│   ├── visualization/        # 📊 Funções de visualização
+│   │   ├── __init__.py
+│   │   └── plotting.py       # Plotagem de curvas e gráficos
+│   │
+│   ├── interfaces/           # 🖥️ Interfaces de usuário
+│   │   ├── __init__.py
+│   │   ├── streamlit_app.py  # Interface web (Streamlit)
+│   │   └── tkinter_app.py    # Interface desktop (Tkinter)
+│   │
+│   └── examples/             # 📚 Exemplos de uso
+│       ├── __init__.py
+│       └── exemplos_basicos.py # Demonstrações práticas
+│
+└── docs/                     # 📋 Documentação adicional
+```
 
 ---
 
-## 🧰 Tecnologias Utilizadas
+## ⚙️ Funcionalidades
 
-- `Python` – linguagem principal
-- `NumPy` – operações matriciais e vetoriais
-- `Matplotlib` – visualizações gráficas
-- `Streamlit` – interface web interativa
+### 🔢 Operações com Matrizes
+- **Forma Escada (Gauss-Jordan)**: Escalonamento para resolver sistemas
+- **Matriz Inversa**: Cálculo da inversa, se existir
+- **Verificação de Invertibilidade**
+- **Cálculo do Posto da Matriz**
+- **Resolução de Sistemas Lineares** com matriz aumentada
+- **Determinante** (método geral e Regra de Sarrus)
+- **Transposta** e **Produto de Matrizes**
+- **Verificação de Tipos** (quadrada, simétrica, identidade, etc.)
+
+### ➡️ Operações com Vetores
+- **Soma e Multiplicação por Escalar**
+- **Produto Escalar e Vetorial**
+- **Produto Misto**: Cálculo de volumes em 3D
+- **Ângulo entre Vetores**
+- **Norma e Vetor Unitário**
+- **Projeção Vetorial**
+- **Verificações** (ortogonais, paralelos)
+
+### 📐 Geometria Analítica
+- **Equações de Retas** (paramétricas e simétricas)
+- **Equações de Planos** (paramétricas e cartesianas)
+- **Ângulos entre Retas e Planos**
+- **Distâncias** (ponto-reta, ponto-plano, entre retas)
+- **Interseções** entre planos
+- **Verificações** (paralelas, perpendiculares)
+
+### 📊 Visualizações Gráficas
+- **Elipses, Parábolas, Hipérboles e Círculos**
+- **Curvas Polares**
+- **Retas e Vetores**
+- **Múltiplas Curvas** no mesmo gráfico
+- **Personalização** com cores, títulos e legendas
 
 ---
 
@@ -42,32 +88,57 @@ Este repositório reúne scripts e ferramentas interativas para explorar conceit
 Tenha o Python instalado. Em seguida, instale as dependências:
 
 ```bash
-pip install numpy matplotlib streamlit
+pip install -r requirements.txt
 ```
 
-### Executando o Projeto
+### 🎯 Forma Mais Simples - Menu Interativo
 
-Clone o repositório:
+Execute o arquivo principal para acessar um menu interativo:
 
 ```bash
-git clone https://github.com/seu-usuario/geometria_analitica.git
-cd geometria_analitica
+python main.py
 ```
 
-Execute os scripts:
+O menu oferece 4 opções:
+1. **Executar exemplos básicos** - Demonstrações das funcionalidades
+2. **Iniciar interface web** - Aplicação Streamlit no navegador
+3. **Iniciar interface desktop** - Aplicação Tkinter
+4. **Sair**
 
-- Scripts de cálculo e visualização:
-  ```bash
-  python geometria_analitica.py
-  ```
+### 🔧 Uso Direto dos Módulos
 
-- Interface web:
-  ```bash
-  streamlit run resolutor_matrizes.py
-  ```
+#### Importar funcionalidades:
+```python
+from src.core import *
+from src.visualization import *
 
-Ou acesse diretamente:  
-👉 [https://resolutormatrizesrafaelhonorato.streamlit.app/](https://resolutormatrizesrafaelhonorato.streamlit.app/)
+# Exemplo: operações com matrizes
+A = np.array([[1, 2], [3, 4]])
+det = determinante(A)
+inv = inversa_matriz(A)
+
+# Exemplo: operações com vetores
+u = np.array([1, 1, 0])
+v = np.array([-1, 1, 0])
+angulo = angulo_entre_vetores(u, v)
+
+# Exemplo: visualização
+plotar_elipse(3, 2, title="Minha Elipse")
+```
+
+#### Executar exemplos:
+```bash
+python src/examples/exemplos_basicos.py
+```
+
+#### Interfaces individuais:
+```bash
+# Interface web
+streamlit run src/interfaces/streamlit_app.py
+
+# Interface desktop
+python src/interfaces/tkinter_app.py
+```
 
 ---
 
@@ -75,43 +146,62 @@ Ou acesse diretamente:
 
 ### 📐 Resolução de Sistema Linear
 
-**Entrada:**
-```
-2  1 -1  8  
--3 -1  2 -11  
--2  1  2 -3
+```python
+from src.core import resolver_sistema
+import numpy as np
+
+# Sistema: 2x - y + 3z = 8
+#          -3x - y + 2z = -11
+#          -2x + y + 2z = -3
+
+matriz_aumentada = np.array([
+    [2, -1, 3, 8],
+    [-3, -1, 2, -11],
+    [-2, 1, 2, -3]
+])
+
+solucao = resolver_sistema(matriz_aumentada)
+print(f"Solução: {solucao}")
+# Resultado: [2. 3. -1.]
 ```
 
-**Resultado:**  
-```
-Solução: [2. 3. -1.]
-```
-
-### 📈 Gráfico de Elipse com Matplotlib
+### 📈 Gráfico de Elipse
 
 ```python
-a, b, x0, y0 = 3, 2, -2, 1
-t = np.linspace(-1, 2 * np.pi, 100)
-x = a * np.cos(t) + x0
-y = b * np.sin(t) + y0
+from src.visualization import plotar_elipse
 
-plt.plot(x, y)
-plt.title("Gráfico da Elipse")
-plt.axis("equal")
-plt.show()
+# Elipse com a=3, b=2, centro em (-2, 1)
+plotar_elipse(3, 2, -2, 1, title="Elipse Centrada")
+```
+
+### ➡️ Operações com Vetores
+
+```python
+from src.core import *
+
+u = np.array([1, 1, 0])
+v = np.array([-1, 1, 0])
+
+# Produto escalar
+prod_escalar = produto_escalar(u, v)
+
+# Ângulo entre vetores
+angulo = angulo_entre_vetores(u, v)
+
+# Verificar se são ortogonais
+sao_ort = sao_ortogonais(u, v)
 ```
 
 ---
 
-## 📁 Estrutura do Repositório
+## 🧰 Tecnologias Utilizadas
 
-```
-geometria_analitica/
-├── geometria_analitica.py      # Scripts para gráficos e vetores
-├── resolutor_matrizes.py       # Interface interativa com Streamlit
-├── README.md                   # Documentação do projeto
-└── requirements.txt            # Dependências do projeto
-```
+- **Python** – Linguagem principal
+- **NumPy** – Operações matriciais e vetoriais
+- **Matplotlib** – Visualizações gráficas
+- **Streamlit** – Interface web interativa
+- **Tkinter** – Interface desktop
+- **SymPy** – Cálculos simbólicos
 
 ---
 
